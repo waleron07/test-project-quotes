@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Tab, Tabs, Typography, Box } from '@material-ui/core';
 import { fetchTableData } from '@/rtk_qwery/slices';
-import { useAppSelector } from '@/hook';
+import { useAppSelector, AppDispatch } from '@/hook';
 import { Notification, Table, Modal } from '@/Components';
 
 type PropsTypes = {
@@ -32,7 +32,7 @@ function TabPanel(props: PropsTypes) {
 
 const defaultValue = 0;
 const Quotes = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { tableData } = useAppSelector((state) => state);
   const [value, setValue] = useState(defaultValue);
   const [notificationMessage, setNotificationMessage] = useState('');
@@ -61,7 +61,6 @@ const Quotes = () => {
 
   const wrapperFetchTableData = useCallback(async () => {
     try {
-      // @ts-ignore
       await dispatch(fetchTableData());
     } catch (err) {
       console.error(err);

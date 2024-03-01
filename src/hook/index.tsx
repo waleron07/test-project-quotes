@@ -1,3 +1,4 @@
-import { useAppSelector, useAppDispatch } from './hook';
+import { useAppSelector, AppDispatch } from './hook';
 
-export { useAppSelector, useAppDispatch };
+export { useAppSelector };
+export type { AppDispatch };
