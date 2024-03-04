@@ -55,8 +55,8 @@ const Quotes = () => {
   useEffect(() => {
     if (error) {
       setNotificationMessage(error);
-      setNotificationOpen(true);
     }
+    setNotificationOpen(!!error);
   }, [error]);
 
   const wrapperFetchTableData = useCallback(async () => {
@@ -73,11 +73,8 @@ const Quotes = () => {
 
   useEffect(() => {
     let timerId: TimerType = null;
-    if (!notificationOpen && !openModal) {
-      timerId = setInterval(() => {
-        wrapperFetchTableData();
-      }, 5000);
-      wrapperFetchTableData();
+    if (!openModal) {
+      timerId = setInterval(wrapperFetchTableData, 5000);
     } else {
       clearTimeout(timerId);
     }
